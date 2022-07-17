@@ -1,0 +1,119 @@
+[2021-11-30T15:41:55Z ERROR rls::actions::hover] racer_def: racer panicked
+error: expected one of `.`, `?`, `{`, or an operator, found `}`
+  --> <stdin>:15:2
+   |
+14 |         while match self.reader.read(buf: &mut [u8])
+   |               -----                                 - expected one of `.`, `?`, `{`, or an operator
+   |               |
+   |               while parsing this match expression
+15 |     }
+   |     ^ unexpected token
+
+error: expected one of `.`, `?`, `{`, or an operator, found `}`
+  --> <stdin>:15:2
+   |
+14 |         while match self.reader.read(buf: &mut [u8])
+   |               -----                                 - expected one of `.`, `?`, `{`, or an operator
+   |               |
+   |               while parsing this match expression
+15 |     }
+   |     ^ unexpected token
+
+error: expected one of `.`, `?`, `{`, or an operator, found `}`
+  --> <stdin>:15:2
+   |
+14 |         while match self.reader.read(buf: &mut [u8])
+   |               -----                                 - expected one of `.`, `?`, `{`, or an operator
+   |               |
+   |               while parsing this match expression
+15 |     }
+   |     ^ unexpected token
+
+error: expected one of `.`, `?`, `{`, or an operator, found `}`
+  --> <stdin>:15:2
+   |
+14 |         while match self.reader.read(buf: &mut [u8])
+   |               -----                                 - expected one of `.`, `?`, `{`, or an operator
+   |               |
+   |               while parsing this match expression
+15 |     }
+   |     ^ unexpected token
+
+error: expected one of `.`, `?`, `{`, or an operator, found `}`
+  --> <stdin>:15:2
+   |
+14 |         while match self.reader.read(buf: &mut [u8])
+   |               -----                                 - expected one of `.`, `?`, `{`, or an operator
+   |               |
+   |               while parsing this match expression
+15 |     }
+   |     ^ unexpected token
+
+error: expected one of `.`, `;`, `?`, `}`, or an operator, found `,`
+  --> <stdin>:23:10
+   |
+23 |                 false,
+   |                      ^ expected one of `.`, `;`, `?`, `}`, or an operator
+
+error: expected one of `->`, `;`, `where`, or `{`, found keyword `pub`
+ --> <stdin>:2:1
+  |
+1 | impl Dummy { pub fn new()
+  |            -             - expected one of `->`, `;`, `where`, or `{`
+  |            |
+  |            while parsing this item list starting here
+2 | pub fn load() { unimplemented!() } }
+  | ^^^ unexpected token               - the item list ends here
+
+[2021-11-30T16:01:22Z ERROR rls::actions::hover] format_method: error: Failed, input: "impl Dummy { pub fn new()\npub fn load() { unimplemented!() } }"
+error: expected one of `->`, `;`, `where`, or `{`, found keyword `pub`
+ --> <stdin>:2:1
+  |
+1 | impl Dummy { fn run_client_stream()
+  |            -                       - expected one of `->`, `;`, `where`, or `{`
+  |            |
+  |            while parsing this item list starting here
+2 | pub fn load(self) { unimplemented!() } }
+  | ^^^ unexpected token                   - the item list ends here
+
+[2021-11-30T16:05:24Z ERROR rls::actions::hover] format_method: error: Failed, input: "impl Dummy { fn run_client_stream()\npub fn load(self) { unimplemented!() } }"
+[2021-11-30T16:05:34Z ERROR rls::actions::hover] racer_def: racer panicked
+[2021-11-30T16:05:34Z ERROR rls::actions::hover] racer_def: racer panicked
+[2021-11-30T16:05:38Z ERROR rls::actions::hover] racer_def: racer panicked
+error: visibility `pub(self)` is not followed by an item
+  --> <stdin>:45:2
+   |
+45 |     pub(self) {
+   |     ^^^^^^^^^ the visibility
+   |
+   = help: you likely meant to define an item, e.g., `pub(self) fn foo() {}`
+
+error: non-item in item list
+  --> <stdin>:45:12
+   |
+40 | impl Client {
+   |             - item list starts here
+...
+45 |     pub(self) {
+   |               ^ non-item starts here
+...
+70 | }
+   | - item list ends here
+
+error: unexpected closing delimiter: `}`
+  --> <stdin>:69:1
+   |
+59 |     pub fn load(self) {
+   |                       - this opening brace...
+...
+68 |     }
+   |     - ...matches this closing brace
+69 | }
+   | ^ unexpected closing delimiter
+
+error: expected one of `)`, `,`, `.`, `?`, or an operator, found `;`
+  --> <stdin>:41:75
+   |
+41 |         let writer = BufWriter::new(stream.try_clone().expect("Writer clone..."););
+   |                                                                                 ^ expected one of `)`, `,`, `.`, `?`, or an operator
+
