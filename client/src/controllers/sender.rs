@@ -16,10 +16,23 @@ impl Sender {
         app_state: Result<&StateEnum, &StateEnum>,
         message: &mut String,
     ) {
-        if let StateEnum::Message = app_state.unwrap() {
-            if let KeyCode::Enter = key.code {
-                self.writer.write(message.as_bytes())
+        match app_state.unwrap() {
+            StateEnum::Message => {
+                if let KeyCode::Enter = key.code {
+                    self.writer.write(message.as_bytes())
+                }
             }
+            StateEnum::NoUserName => {
+                if let KeyCode::Enter = key.code {
+                    self.writer.write(message.as_bytes())
+                }
+            }
+            _ => {}
         }
+        // if let StateEnum::Message = app_state.unwrap() {
+        //     if let KeyCode::Enter = key.code {
+        //         self.writer.write(message.as_bytes())
+        //     }
+        // }
     }
 }

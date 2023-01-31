@@ -5,6 +5,7 @@ pub enum StateEnum {
     Message,
     Normal,
     Exit,
+    NoUserName,
 }
 #[derive(Debug)]
 pub struct State {
@@ -13,7 +14,7 @@ pub struct State {
 impl State {
     pub fn create() -> State {
         State {
-            state: StateEnum::Normal,
+            state: StateEnum::NoUserName,
         }
     }
     fn is_message(&mut self) -> StateEnum {
@@ -24,6 +25,10 @@ impl State {
         self.state = StateEnum::Normal;
         StateEnum::Normal
     }
+    fn no_username(&mut self) -> StateEnum {
+        self.state = StateEnum::NoUserName;
+        StateEnum::NoUserName
+    }
     fn is_exit(&mut self) -> StateEnum {
         self.state = StateEnum::Exit;
         StateEnum::Exit
@@ -33,6 +38,11 @@ impl State {
     }
     pub fn key_state(&mut self, key: KeyEvent) -> Result<StateEnum, StateEnum> {
         match self.state {
+            StateEnum::NoUserName => match key.code {
+                KeyCode::Char('l') => Ok(self.is_exit()),
+                KeyCode::Enter => Ok(self.normal()),
+                _ => return Ok(self.no_username()),
+            },
             StateEnum::Normal => match key.code {
                 KeyCode::Char('e') => Ok(self.is_message()),
                 KeyCode::Char('q') => Ok(self.is_exit()),

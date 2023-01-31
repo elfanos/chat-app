@@ -12,8 +12,8 @@ use tui::{
 };
 
 use super::{
-    components::{Input, Instruction},
-    layouts::{ChatRoom, Container, Textfield},
+    components::{Input, Instruction, UserName},
+    layouts::{ChatRoom, Container, Textfield, UserContainer},
 };
 use crate::app_state::AppState;
 use crate::controllers::StateEnum;
@@ -83,8 +83,21 @@ fn ui<B: Backend>(f: &mut Frame<B>, app_state: &mut AppState) {
     let message = &app_state.handles.message;
     let intruction = Instruction::create(app_state.state.current_state());
     let input_component = Input::create(app_state.state.current_state());
-    // container
+    let username_component = UserName::create(app_state.state.current_state());
     let container = Container::create(f.size());
+    let user_selection_container = UserContainer::create(f.size());
+    if let StateEnum::NoUserName = app_state.state.current_state().unwrap() {
+        let block2 = Block::default()
+            .title("Enter username")
+            .borders(Borders::NONE);
+        f.render_widget(block2, user_selection_container.0[0]);
+        f.render_widget(
+            username_component.get_view(message.0.to_string()),
+            user_selection_container.0[1],
+        );
+        return;
+    }
+    // container
     let logs: Vec<ListItem> = app_state
         .logs
         .iter()

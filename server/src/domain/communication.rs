@@ -1,9 +1,9 @@
 use std::{collections::HashMap, net::TcpStream};
 
-use super::writer::Writer;
+use crate::app_state::AppState;
 
-pub fn broadcast(message: &mut [u8], context: &mut HashMap<String, Writer<TcpStream>>) {
+pub fn broadcast(message: &mut [u8], context: &mut HashMap<String, AppState>) {
     for (_, writer) in context.into_iter() {
-        writer.write(message)
+        writer.writer.write(message).unwrap();
     }
 }

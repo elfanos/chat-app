@@ -6,9 +6,11 @@ use std::net::{TcpListener, TcpStream};
 use std::sync::{Arc, Mutex};
 use std::thread;
 
+use crate::app_state::AppState;
 use crate::domain::reader::Reader;
 use crate::domain::socket::Socket;
 use crate::domain::writer::Writer;
+use crate::modal::User;
 
 fn generate_socket_id() -> String {
     thread_rng()
@@ -29,7 +31,7 @@ impl Server {
     }
     pub(self) fn create_client_connection(
         stream: TcpStream,
-        socket: &mut Arc<Mutex<Socket<Writer<TcpStream>>>>,
+        socket: &mut Arc<Mutex<Socket<AppState>>>,
     ) {
         println!("New connection: {}", stream.peer_addr().unwrap());
         let mut reader = Reader::new(
@@ -40,9 +42,12 @@ impl Server {
 
         thread::spawn(move || {
             data_mutex_clone.lock().unwrap().add_connection(
-                Writer::new(BufWriter::new(
-                    stream.try_clone().expect("Creating a writer to client"),
-                )),
+                AppState::create(
+                    User::create("user".to_string()),
+                    Writer::new(BufWriter::new(
+                        stream.try_clone().expect("Creating a writer to client"),
+                    )),
+                ),
                 reader.get_id().clone(),
             );
             reader.read(data_mutex_clone)
@@ -51,7 +56,7 @@ impl Server {
     pub fn run(&self) {
         let listener = TcpListener::bind(&self.ip).unwrap();
 
-        let socket = Socket::new(HashMap::<String, Writer<TcpStream>>::new());
+        let socket = Socket::new(HashMap::<String, AppState>::new());
 
         let mut data = Arc::new(Mutex::new(socket));
 

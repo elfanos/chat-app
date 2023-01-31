@@ -1,4 +1,7 @@
-use crate::domain::{communication::broadcast, socket::Socket};
+use crate::{
+    app_state::AppState,
+    domain::{communication::broadcast, socket::Socket},
+};
 use std::{
     io::{BufReader, Read},
     net::TcpStream,
@@ -18,7 +21,7 @@ impl<T: Read> Reader<T> {
         Reader { reader, key }
     }
 
-    pub fn read(&mut self, context: Arc<Mutex<Socket<Writer<TcpStream>>>>) {
+    pub fn read(&mut self, context: Arc<Mutex<Socket<AppState>>>) {
         loop {
             let mut buffer = [0 as u8; 50];
             match self.reader.read(&mut buffer) {

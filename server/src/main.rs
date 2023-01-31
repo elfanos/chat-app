@@ -1,6 +1,8 @@
 use server::Server;
 
+mod app_state;
 mod domain;
+mod modal;
 mod server;
 
 fn main() {
